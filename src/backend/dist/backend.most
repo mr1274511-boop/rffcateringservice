@@ -1,0 +1,64 @@
+// Version: 1.0.0
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type I18nText__767767866 = {ar : Text; en : Text; ta : Text};
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type Map__158565046<K, V> = Map__297112838<K, V>;
+type Map__297112838<K, V> =
+  {var root : Node__46230540<K, V>; var size : Nat__490723111};
+type Map__605269027<K, V> = Map__158565046<K, V>;
+type MenuCategory__1016481158 = {#biryani; #other; #rice; #sides; #sweets};
+type MenuItemId__18119667 = Nat;
+type MenuItem__849097284 =
+  {
+    category : MenuCategory__1016481158;
+    description : I18nText__767767866;
+    id : MenuItemId__18119667;
+    imageUrl : Text;
+    isAvailable : Bool;
+    name : I18nText__767767866;
+    price : ?Nat
+  };
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type OrderId__197865225 = Nat;
+type OrderItem__88023377 =
+  {
+    menuItemId : MenuItemId__18119667;
+    name : Text;
+    quantity : Nat;
+    unitPrice : Nat
+  };
+type OrderStatus__499686600 = {#beingPrepared; #delivered; #placed; #ready};
+type Order__219004561 =
+  {
+    contactNumber : Text;
+    createdAt : Timestamp__301639476;
+    customerName : Text;
+    items : [OrderItem__88023377];
+    notes : Text;
+    orderId : OrderId__197865225;
+    paymentMethod : PaymentMethod__956263621;
+    status : OrderStatus__499686600;
+    totalPrice : Nat
+  };
+type PaymentMethod__956263621 = {#cod; #qr};
+type Timestamp__301639476 = Int;
+type UserRole__1073662873 = {#admin; #guest; #user};
+actor {
+  stable accessControlState :
+    {
+      var adminAssigned : Bool;
+      userRoles : Map__605269027<Principal, UserRole__1073662873>
+    };
+  stable cateringState :
+    {
+      counters : {var nextMenuItemId : Nat; var nextOrderId : Nat};
+      menuItems : Map__605269027<MenuItemId__18119667, MenuItem__849097284>;
+      orders : Map__605269027<OrderId__197865225, Order__219004561>
+    }
+};

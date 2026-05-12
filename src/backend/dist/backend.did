@@ -1,0 +1,99 @@
+type UserRole = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+type Timestamp = int;
+type PlaceOrderInput = 
+ record {
+   contactNumber: text;
+   customerName: text;
+   items: vec record {
+                menuItemId: MenuItemId;
+                quantity: nat;
+              };
+   notes: text;
+   paymentMethod: PaymentMethod;
+ };
+type PaymentMethod = 
+ variant {
+   cod;
+   qr;
+ };
+type OrderStatus = 
+ variant {
+   beingPrepared;
+   delivered;
+   placed;
+   ready;
+ };
+type OrderItem = 
+ record {
+   menuItemId: MenuItemId;
+   name: text;
+   quantity: nat;
+   unitPrice: nat;
+ };
+type OrderId = nat;
+type Order = 
+ record {
+   contactNumber: text;
+   createdAt: Timestamp;
+   customerName: text;
+   items: vec OrderItem;
+   notes: text;
+   orderId: OrderId;
+   paymentMethod: PaymentMethod;
+   status: OrderStatus;
+   totalPrice: nat;
+ };
+type NewMenuItemInput = 
+ record {
+   category: MenuCategory;
+   description: I18nText;
+   imageUrl: text;
+   isAvailable: bool;
+   name: I18nText;
+   price: opt nat;
+ };
+type MenuItemId = nat;
+type MenuItem = 
+ record {
+   category: MenuCategory;
+   description: I18nText;
+   id: MenuItemId;
+   imageUrl: text;
+   isAvailable: bool;
+   name: I18nText;
+   price: opt nat;
+ };
+type MenuCategory = 
+ variant {
+   biryani;
+   other;
+   rice;
+   sides;
+   sweets;
+ };
+type I18nText = 
+ record {
+   ar: text;
+   en: text;
+   ta: text;
+ };
+service : {
+  _initializeAccessControl: () -> ();
+  addMenuItem: (input: NewMenuItemInput) -> (MenuItem);
+  assignCallerUserRole: (user: principal, role: UserRole) -> ();
+  getAllOrders: () -> (vec Order) query;
+  getCallerUserRole: () -> (UserRole) query;
+  getMenuItem: (id: MenuItemId) -> (opt MenuItem) query;
+  getMenuItems: () -> (vec MenuItem) query;
+  getOrderStatus: (orderId: OrderId) -> (opt OrderStatus) query;
+  isCallerAdmin: () -> (bool) query;
+  placeOrder: (input: PlaceOrderInput) -> (Order);
+  removeMenuItem: (id: MenuItemId) -> (bool);
+  updateMenuItem: (id: MenuItemId, input: NewMenuItemInput) -> (opt MenuItem);
+  updateOrderStatus: (orderId: OrderId, status: OrderStatus) -> (opt Order);
+}

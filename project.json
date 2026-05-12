@@ -1,0 +1,29 @@
+{
+  "overview": "A full-stack trilingual catering website for RFF Catering Service with an Islamic-themed design. Customers can browse the menu, place orders, view invoices, pay via QR code or Cash on Delivery, and track their order status. The owner has a password-protected admin dashboard for complete menu management and real-time order updates.",
+  "features": [
+    "Bismillah banner in Arabic and English with meaning",
+    "Trilingual support: Arabic (RTL), English, and Tamil",
+    "Menu with food images, prices, and order buttons",
+    "Guest order placement with name and contact number",
+    "Itemised invoice with QR code payment or Cash on Delivery",
+    "Real-time order status tracking by order ID",
+    "Password-protected admin dashboard",
+    "Full menu CRUD: add, edit, remove items and prices",
+    "Order management with status updates",
+    "Islamic-themed design with green, gold, and white colours"
+  ],
+  "category": "food-and-drink",
+  "tags": [
+    "catering",
+    "food",
+    "restaurant",
+    "multilingual",
+    "arabic",
+    "tamil",
+    "islamic",
+    "ordering",
+    "admin",
+    "invoice"
+  ],
+  "last_updated": "2026-05-12T02:13:17.337Z"
+}
